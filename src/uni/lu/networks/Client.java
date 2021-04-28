@@ -9,10 +9,12 @@ public class Client
  // initialize socket and input output streams
  private Socket socket            = null;
  private DataInputStream  input   = null;
+ private DataInputStream  serverFeedBack   = null; // GET THE RETURN FROM SERVER
  private DataOutputStream out     = null;
 
  // constructor to put ip address and port
- public Client(String address, int port)
+ @SuppressWarnings("deprecation")
+public Client(String address, int port)
  {
      // establish a connection
      try
@@ -22,7 +24,6 @@ public class Client
 
          // takes input from terminal
          input  = new DataInputStream(System.in);
-
          // sends output to the socket
          out    = new DataOutputStream(socket.getOutputStream());
      }
@@ -37,14 +38,15 @@ public class Client
 
      // string to read message from input
      String line = "";
-
      // keep reading until "Over" is input
      while (!line.equals("Over"))
      {
          try
          {
              line = input.readLine();
+             
              out.writeUTF(line);
+             
          }
          catch(IOException i)
          {
@@ -67,6 +69,6 @@ public class Client
 
  public static void main(String args[])
  {
-     Client client = new Client("127.0.0.1", 5000);
+     Client client = new Client("127.0.0.2", 5000);
  }
 }
