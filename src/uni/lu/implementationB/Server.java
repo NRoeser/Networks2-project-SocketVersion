@@ -1,4 +1,4 @@
-package uni.lu.networks;
+package uni.lu.implementationB;
 
 //A Java program for a Server
 import java.net.*;
