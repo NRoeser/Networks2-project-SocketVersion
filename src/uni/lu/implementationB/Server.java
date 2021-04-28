@@ -9,6 +9,7 @@ public class Server
 {
  //initialize socket and input stream
  private Socket          socket   = null;
+ private Socket			 socket1 = null;
  private ServerSocket    server   = null;
  private DataInputStream in       =  null;
  private DataOutputStream out     = null;
@@ -21,11 +22,13 @@ public class Server
      // starts server and waits for a connection
      try
      {
+    	 
          server = new ServerSocket(port);
          System.out.println("Server started");
 
          System.out.println("Waiting for a client ...");
-
+         
+         
          socket = server.accept();
          System.out.println("Client accepted");
 
