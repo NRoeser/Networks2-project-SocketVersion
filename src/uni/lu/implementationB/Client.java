@@ -47,14 +47,7 @@ public Client(String address, int port)
          try
          {
              line = input.readLine();
-             out.writeUTF(line);
-             
-             response = serverFeedBack.readUTF();
-             if(!response.equals("")) {
-            	 System.out.println(response);
-             }
-             
-             
+             out.writeUTF(line);             
          }
          catch(IOException i)
          {
