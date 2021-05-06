@@ -7,6 +7,7 @@ import java.io.*;
 
 public class ServerA {
 //initialize socket and input stream
+	private String adress = null;
 	private Socket socket = null;
 	private Socket socket1 = null;
 	private ServerSocket server = null;
@@ -16,6 +17,10 @@ public class ServerA {
 
 // constructor with port
 	public ServerA(String address, int port) {
+		
+		this.adress = address;
+		
+		keyValue.put("SecretKey", "SecretValue");
 
 		// starts server and waits for a connection
 		try
@@ -42,10 +47,28 @@ public class ServerA {
 	     // keep reading until "Over" is input
 	     while (!line.equals("Over"))
 	     {
+	    	 response = "";
 	         try
 	         {
 	             line = in.readUTF();
-	             System.out.println("Hello from Server A: " + line);
+	             String[] splitInput = line.split(":");
+					if (splitInput[0].equals("SET")) {
+						if (adress.equals(splitInput[3])) {
+							keyValue.put(splitInput[1], splitInput[2]);
+							System.out.println(keyValue + "Stored");
+						} else {
+							System.out.println("No Server with this adress found");
+						}
+
+					} else if (splitInput[0].equals("GET")) {
+						if (keyValue.containsKey(splitInput[1])) {
+							response = keyValue.get(splitInput[1]);
+						} else {
+							response = "Key not in network! ";
+						}
+						System.out.println("got a get request for key: " + splitInput[1]);
+					}
+					out.writeUTF(response);
 	         }
 	         catch(IOException i)
 	         {
