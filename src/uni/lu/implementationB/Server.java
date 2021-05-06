@@ -8,17 +8,22 @@ import java.io.*;
 public class Server extends Thread
 {
  //initialize socket and input stream
+ private Socket			 mySocket = null;
  private Socket          socket   = null;
  private Socket			 socket1 = null;
  private ServerSocket    server   = null;
+ private ServerSocket	 server2 = null;
  private DataInputStream in       =  null;
  private DataOutputStream out     = null;
  private HashMap<String,String> keyValue = new HashMap<String,String>();
  private int port,port1;
  
  // constructor with port
- public Server(int port,int port1)
- {
+ public Server(String adress, int mySocket, int port,int port1) throws UnknownHostException, IOException
+ {	
+	 if (mySocket != 6000) {
+		 this.mySocket = new Socket(adress, mySocket);
+	 }
 	 this.port=port;
 	 this.port1=port1;
  }
@@ -28,12 +33,13 @@ public class Server extends Thread
      try
      {
          server = new ServerSocket(port);
+         server2 = new ServerSocket(port1);
          System.out.println("Server started");
 
          System.out.println("Waiting for a client ...");
          
          if(port1!=0) {
-        	 socket1 = new Socket("132131",port);
+        	 socket1 = server2.accept();
          }
         
          socket = server.accept();
@@ -98,11 +104,11 @@ public class Server extends Thread
      }
  }
 
- public static void main(String args[])
+ public static void main(String args[]) throws UnknownHostException, IOException
  {
-     Server server = new Server(5000,6000);
+     Server server = new Server("1.102.12.21", 6000, 5000, 4000);
      server.start();
-     Server serverA = new Server(6000,0);
+     Server serverA = new Server("1.101.45.16", 4000, 6000, 0);
      serverA.start();
  }
 }

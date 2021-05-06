@@ -63,12 +63,6 @@ public class Server
                 }
                 
                 out.writeUTF(valueResponse);
-                
-                
-                
-                
-                
-
              }
              
              catch(IOException i)
