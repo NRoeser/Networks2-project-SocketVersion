@@ -17,6 +17,11 @@ public class Server {
 	private DataInputStream in1 = null;
 	private DataOutputStream out1 = null;
 	private HashMap<String, String> keyValue = new HashMap<String, String>();
+	
+	
+//IMPORTANT: The classes need to be run in this order: Server --> Client --> ServerA
+
+	
 
 	// constructor with port
 	public Server(String adress, int port1, int port2) {

@@ -11,6 +11,11 @@ public class Client
  private DataInputStream  input   = null;
  private DataInputStream  serverFeedBack   = null; // GET THE RETURN FROM SERVER
  private DataOutputStream out     = null;
+ 
+ 
+//IMPORTANT: The classes need to be run in this order: Server --> Client --> ServerA
+
+ 
 
  // constructor to put ip address and port
  @SuppressWarnings("deprecation")
