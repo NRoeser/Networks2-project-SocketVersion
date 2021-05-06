@@ -32,8 +32,11 @@ public class Server extends Thread
 
          System.out.println("Waiting for a client ...");
          
+         
          if(port1!=0) {
-        	 socket1 = new Socket("132131",port);
+        	 System.out.println("Created new socket port: " +port1);
+        	 socket1 = new Socket("132.123.651",port);
+        	 System.out.println("Created new socket port: " +port1);
          }
         
          socket = server.accept();
@@ -52,6 +55,7 @@ public class Server extends Thread
          // reads message from client until "Over" is sent
          while (!line.equals("Over"))
          {
+        	 socket = server.accept();
         	 valueResponse="";
              try
              {
